@@ -1,0 +1,6 @@
+<figure (click)="onClick()" style="cursor:pointer">
+  <img src="assets/mister.png" alt="mister">
+  <figcaption *ngIf="says$ | async">
+    <h2>{{says$ | async}}</h2>
+  </figcaption>
+</figure>

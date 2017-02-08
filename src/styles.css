@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "~@angular/material/core/theming/prebuilt/deeppurple-amber.css";
+figure {
+  position: relative;
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+
+figcaption {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+figcaption>* {
+  background: white;
+  padding: 1em;
+  border-radius: 1em;
+  transform: rotate(-20deg);
+}
