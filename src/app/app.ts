@@ -6,6 +6,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   template: `
   <h1>Ngrx Ducklings</h1>
   <mister></mister>
+  <missus></missus>
   `
 })
 export class AppComponent {

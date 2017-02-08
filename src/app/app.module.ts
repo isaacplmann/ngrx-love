@@ -1,3 +1,4 @@
+import { MissusComponent } from './missus/missus.component';
 import { MisterComponent } from './mister/mister.component';
 import { AppComponent } from './app';
 import { reducer } from './store';
@@ -47,6 +48,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
   ],
   declarations: [
     AppComponent,
+    MissusComponent,
     MisterComponent,
   ],
   providers: [

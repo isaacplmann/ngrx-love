@@ -37,6 +37,7 @@ import { combineReducers } from '@ngrx/store';
  * the state of the reducer plus any selector functions. The `* as`
  * notation packages up all of the exports into a single object.
  */
+import * as fromMissus from '../missus/reducer';
 import * as fromMister from '../mister/reducer';
 
 
@@ -45,6 +46,7 @@ import * as fromMister from '../mister/reducer';
  * our top level state interface is just a map of keys to inner state types.
  */
 export interface State {
+  missus: fromMissus.State;
   mister: fromMister.State;
 }
 
@@ -57,6 +59,7 @@ export interface State {
  * the result from right to left.
  */
 const reducers = {
+  missus: fromMissus.reducer,
   mister: fromMister.reducer,
   router: fromRouter.routerReducer,
 };
@@ -89,6 +92,7 @@ export function reducer(state: any, action: any) {
  * }
  * ```
  */
+export const getMissusState = (state: State) => state.missus;
 export const getMisterState = (state: State) => state.mister;
 
 /**
@@ -101,6 +105,8 @@ export const getMisterState = (state: State) => state.mister;
  * The created selectors can also be composed together to select different
  * pieces of state.
  */
+export const getMissusLocation = createSelector(getMissusState, fromMissus.getLocation);
+export const getMissusSays = createSelector(getMissusState, fromMissus.getSays);
 export const getMisterLocation = createSelector(getMisterState, fromMister.getLocation);
 export const getMisterSays = createSelector(getMisterState, fromMister.getSays);
 

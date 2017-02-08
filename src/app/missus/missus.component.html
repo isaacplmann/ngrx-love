@@ -1,0 +1,6 @@
+<figure>
+  <img src="assets/missus.jpg" alt="missus">
+  <figcaption *ngIf="says$ | async">
+    <h2>{{says$ | async}}</h2>
+  </figcaption>
+</figure>
