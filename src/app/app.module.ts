@@ -1,15 +1,17 @@
+import { DucklingEffects } from './ducklings/effects';
+import { AppComponent } from './app';
+import { DucklingsComponent } from './ducklings/ducklings.component';
+import { MissusEffects } from './missus/effects';
 import { MissusComponent } from './missus/missus.component';
 import { MisterComponent } from './mister/mister.component';
-import { AppComponent } from './app';
 import { reducer } from './store';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from '@angular/material';
 import { BrowserModule } from '@angular/platform-browser';
-// import { EffectsModule } from '@ngrx/effects';
+import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-// import { BookEffects } from './effects/book';
 
 @NgModule({
   imports: [
@@ -44,10 +46,12 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
      *
      * See: https://github.com/ngrx/effects/blob/master/docs/api.md#run
      */
-    // EffectsModule.run(BookEffects),
+    EffectsModule.run(DucklingEffects),
+    EffectsModule.run(MissusEffects),
   ],
   declarations: [
     AppComponent,
+    DucklingsComponent,
     MissusComponent,
     MisterComponent,
   ],

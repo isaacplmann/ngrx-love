@@ -37,6 +37,7 @@ import { combineReducers } from '@ngrx/store';
  * the state of the reducer plus any selector functions. The `* as`
  * notation packages up all of the exports into a single object.
  */
+import * as fromDuckling from '../ducklings/reducer';
 import * as fromMissus from '../missus/reducer';
 import * as fromMister from '../mister/reducer';
 
@@ -46,6 +47,7 @@ import * as fromMister from '../mister/reducer';
  * our top level state interface is just a map of keys to inner state types.
  */
 export interface State {
+  duckling: fromDuckling.DucklingsState;
   missus: fromMissus.State;
   mister: fromMister.State;
 }
@@ -59,6 +61,7 @@ export interface State {
  * the result from right to left.
  */
 const reducers = {
+  duckling: fromDuckling.reducer,
   missus: fromMissus.reducer,
   mister: fromMister.reducer,
   router: fromRouter.routerReducer,
@@ -92,6 +95,7 @@ export function reducer(state: any, action: any) {
  * }
  * ```
  */
+export const getDucklingState = (state: State) => state.duckling;
 export const getMissusState = (state: State) => state.missus;
 export const getMisterState = (state: State) => state.mister;
 

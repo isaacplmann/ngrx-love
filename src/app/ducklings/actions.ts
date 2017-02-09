@@ -5,7 +5,7 @@ import { createAction } from 'redux-actions';
  * enum object for all of this group's action types.
  */
 export const actionTypes = {
-  SQUAWK: '[Missus] Squawk',
+  QUACK: '[Duckling] Quack',
 };
 
 /**
@@ -15,4 +15,4 @@ export const actionTypes = {
  *
  * See Discriminated Unions: https://www.typescriptlang.org/docs/handbook/advanced-types.html#discriminated-unions
  */
-export const squawkAction = createAction<{}>(actionTypes.SQUAWK);
+export const quackAction = createAction<number>(actionTypes.QUACK);

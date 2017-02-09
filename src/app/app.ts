@@ -7,6 +7,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   <h1>Ngrx Ducklings</h1>
   <mister></mister>
   <missus></missus>
+  <ducklings></ducklings>
   `
 })
 export class AppComponent {

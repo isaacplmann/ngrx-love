@@ -1,0 +1,6 @@
+<figure *ngFor="let duckling of ducklings$ | async" style="display: inline-block">
+  <img src="assets/duckling.jpg" alt="duckling">
+  <figcaption *ngIf="duckling.says">
+    <h2>{{duckling.says}}</h2>
+  </figcaption>
+</figure>

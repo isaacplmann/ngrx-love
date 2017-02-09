@@ -1,24 +1,20 @@
+import { DucklingsState } from './reducer';
 import * as fromRoot from '../store';
-import { quackAction } from './actions';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
-  selector: 'mister',
+  selector: 'ducklings',
   styles: [':host { display: inline-block; }'],
-  templateUrl: 'mister.component.html'
+  templateUrl: 'ducklings.component.html'
 })
-export class MisterComponent implements OnInit {
-  says$: Observable<string>;
+export class DucklingsComponent implements OnInit {
+  ducklings$: Observable<DucklingsState>;
 
   constructor(private store: Store<fromRoot.State>) { }
 
   ngOnInit() {
-    this.says$ = this.store.select(fromRoot.getMisterSays);
-  }
-
-  onClick() {
-    this.store.dispatch(quackAction());
+    this.ducklings$ = this.store.select(fromRoot.getDucklingState);
   }
 }

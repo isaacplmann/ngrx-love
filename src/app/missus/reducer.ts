@@ -1,3 +1,4 @@
+import { actionTypes } from './actions';
 import { actionTypes as misterActionTypes } from '../mister/actions';
 import { StoryLocation } from '../models/location';
 import { handleActions } from 'redux-actions';
@@ -17,6 +18,9 @@ export const reducer = handleActions<State>(
     [misterActionTypes.QUACK]: state => {
       return Object.assign({}, state, { says: 'Quack!' });
     },
+    [actionTypes.SQUAWK]: state => {
+      return Object.assign({}, state, { says: 'Squawk!' });
+    }
   },
   initialState);
 
