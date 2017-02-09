@@ -3,8 +3,7 @@
 @import "~@angular/material/core/theming/prebuilt/deeppurple-amber.css";
 figure {
   position: relative;
-  /* justify-content: center; */
-  /* align-items: center; */
+  margin: 0.5em;
 }
 
 figcaption {
