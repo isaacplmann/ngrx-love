@@ -7,7 +7,9 @@ import * as fromRoot from './store';
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
   <h1>Ngrx Ducklings</h1>
-  <button (click)="undo()">Undo</button><button (click)="redo()">Redo</button>
+  <div>
+    <button (click)="undo()">Undo</button><button (click)="redo()">Redo</button>
+  </div>
   <mister></mister>
   <missus></missus>
   <ducklings></ducklings>
