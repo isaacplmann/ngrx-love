@@ -1,7 +1,14 @@
-import { createSelector } from 'reselect';
-import { ActionReducer } from '@ngrx/store';
-import * as fromRouter from '@ngrx/router-store';
 import { environment } from '../../environments/environment';
+import * as fromDuckling from '../ducklings/reducer';
+import * as fromMissus from '../missus/reducer';
+import * as fromMister from '../mister/reducer';
+import { getPresent, undoable, UndoableState } from './undoable';
+import { compose } from '@ngrx/core/compose';
+import * as fromRouter from '@ngrx/router-store';
+import { combineReducers } from '@ngrx/store';
+import { ActionReducer } from '@ngrx/store';
+import { storeFreeze } from 'ngrx-store-freeze';
+import { createSelector } from 'reselect';
 
 /**
  * The compose function is one of our most handy tools. In basic terms, you give
@@ -11,14 +18,12 @@ import { environment } from '../../environments/environment';
  *
  * More: https://drboolean.gitbooks.io/mostly-adequate-guide/content/ch5.html
  */
-import { compose } from '@ngrx/core/compose';
 
 /**
  * storeFreeze prevents state from being mutated. When mutation occurs, an
  * exception will be thrown. This is useful during development mode to
  * ensure that none of the reducers accidentally mutates the state.
  */
-import { storeFreeze } from 'ngrx-store-freeze';
 
 /**
  * combineReducers is another useful metareducer that takes a map of reducer
@@ -28,7 +33,6 @@ import { storeFreeze } from 'ngrx-store-freeze';
  *
  * More: https://egghead.io/lessons/javascript-redux-implementing-combinereducers-from-scratch
  */
-import { combineReducers } from '@ngrx/store';
 
 
 /**
@@ -37,9 +41,6 @@ import { combineReducers } from '@ngrx/store';
  * the state of the reducer plus any selector functions. The `* as`
  * notation packages up all of the exports into a single object.
  */
-import * as fromDuckling from '../ducklings/reducer';
-import * as fromMissus from '../missus/reducer';
-import * as fromMister from '../mister/reducer';
 
 
 /**
@@ -67,8 +68,8 @@ const reducers = {
   router: fromRouter.routerReducer,
 };
 
-const developmentReducer: ActionReducer<State> = compose(storeFreeze, combineReducers)(reducers);
-const productionReducer: ActionReducer<State> = combineReducers(reducers);
+const developmentReducer: ActionReducer<UndoableState<State>> = compose(undoable, storeFreeze, combineReducers)(reducers);
+const productionReducer: ActionReducer<UndoableState<State>> = compose(undoable, combineReducers)(reducers);
 
 export function reducer(state: any, action: any) {
   if (environment.production) {
@@ -95,9 +96,9 @@ export function reducer(state: any, action: any) {
  * }
  * ```
  */
-export const getDucklingState = (state: State) => state.duckling;
-export const getMissusState = (state: State) => state.missus;
-export const getMisterState = (state: State) => state.mister;
+export const getDucklingState = createSelector(getPresent, (state: State) => state.duckling);
+export const getMissusState = createSelector(getPresent, (state: State) => state.missus);
+export const getMisterState = createSelector(getPresent, (state: State) => state.mister);
 
 /**
  * Every reducer module exports selector functions, however child reducers
