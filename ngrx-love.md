@@ -1,6 +1,21 @@
-ngrx
+# Ngrx Love
 
-Why?
+## What?
+
+- "RxJS powered state management for Angular applications, inspired by Redux"
+  - Focus on Redux part today
+  - RxJS will have to be a separate talk
+
+## Terms
+
+- **State** - A single immutable data structure
+- **Actions** - Objects that describe state changes
+- **Reducers** - Pure functions that take the previous state and the next action to compute the new state
+- **Store** - An observable of state and an observer of actions
+  - Can `dispatch` actions
+  - Can `select` state
+
+## Why?
 - Single source of truth
   - One place to trigger actions (store.dispatch)
     - easy to track
@@ -9,22 +24,8 @@ Why?
     - easy to test
   - One place to listen to state changes (store.select)
   - Like a database for the frontend
-- Easy features
-  - HMR
-  - [Undo/Redo](http://blog.brecht.io/Cancellable-optimistic-updates-in-Angular2-and-Redux/)
-- Benefit from work of Redux/React community
-  - Redux Dev Tools extension
-    - Easily view state
-    - Easily generate tests for reducers with real data
-    - Time travel
-    - Export/Import to reproduce bugs, etc.
 
-- Is part of the data record for use in [time travel](http://ngrx.github.io/example-app/#/)
-- Is preserved during hot module replacement
-    - recompiled components can be swapped out without reloading the page
-    - maintain all the current state (except the data that is only inside the component that was replaced)
-
-- [What state should go in redux vs components?](https://github.com/reactjs/redux/issues/1287)
+## How?
 
 Story:
 - Mr. Mallard flying alone (dispatch - reduce - select cycle, Dev Tools)
@@ -42,34 +43,28 @@ Story:
   - child.reducer quacks
   - effect triggered 3 second delay store.dispatch(missus, squawk)
   - missus.reducer squawks
-- whole story
-  - mister quacks, all quack
-  -> missus squawks, mister flies to park
-  -> missus to street, ducklings to street, cars honk
-  -> policeman whistles, cars stop, missus to park, ducklings to park
-- walk through story with dev tools
 - Undo/Redo
-- use dev tools in prod
+- Use dev tools in prod
+  - No performance hit if dev tools not present
+  - Undo to create error
+  - Enable dev tools
+  - Export state
+  - Import state into dev environment
 
-Location = 'River' | 'Street' | 'Park'
+## Why? (part 2)
 
-state:
-mister
-- location
-- says
-
-missus
-- location
-- says
-
-ducklings []
-- location
-- says
-
-cars []
-- speed
-- horn
-
-policeman
-- location
-- says
+- Easy(er) features
+  - HMR
+  - [Undo/Redo](http://blog.brecht.io/Cancellable-optimistic-updates-in-Angular2-and-Redux/)
+- Redux Dev Tools extension
+  - Benefit from work of Redux/React community
+  - Easily view state
+  - Easily generate tests for reducers with real data
+  - Time travel
+  - Export/Import to reproduce bugs, etc.
+- [What state should go in redux vs components?](https://github.com/reactjs/redux/issues/1287)
+  - Data should go in redux if it...
+    - Is part of the data record for use in [time travel](http://ngrx.github.io/example-app/#/)
+    - Is preserved during hot module replacement
+        - recompiled components can be swapped out without reloading the page
+        - maintain all the current state (except the data that is only inside the component that was replaced)

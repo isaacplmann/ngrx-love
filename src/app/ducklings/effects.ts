@@ -1,7 +1,7 @@
 import { actionTypes as misterActionTypes } from './../mister/actions';
-import { quackAction } from './actions';
+import { quackAction, actionTypes } from './actions';
 import { Injectable } from '@angular/core';
-import { Actions, Effect } from '@ngrx/effects';
+import { Actions, Effect, toPayload } from '@ngrx/effects';
 import { Action, Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Rx';
 import * as fromRoot from '../store';
@@ -28,11 +28,15 @@ export class DucklingEffects {
   ) { }
 
   @Effect()
-  search$: Observable<Action> = this.actions$
+  misterQuack$: Observable<Action> = this.actions$
     .ofType(misterActionTypes.QUACK)
+    .map(() => quackAction(0));
+
+  @Effect()
+  ducklingQuack$: Observable<Action> = this.actions$
+    .ofType(actionTypes.QUACK).map(toPayload)
     .withLatestFrom(this.store.select(fromRoot.getDucklingState))
-    .mergeMap(value => Observable.range(0, value[1].length)).windowCount(1)
-    .map((duckling$, index) => duckling$.delay(index * 400))
-    .mergeAll()
-    .map(index => quackAction(index));
+    .filter(([ducklingIndex, ducklings]) => ducklingIndex < ducklings.length - 1)
+    .map(([ducklingIndex]) => quackAction(ducklingIndex + 1))
+    .delay(400);
 }
