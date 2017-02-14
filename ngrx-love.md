@@ -44,6 +44,8 @@ Story:
   - effect triggered 3 second delay store.dispatch(missus, squawk)
   - missus.reducer squawks
 - Undo/Redo
+  - Undoable
+  - 
 - Use dev tools in prod
   - No performance hit if dev tools not present
   - Undo to create error
